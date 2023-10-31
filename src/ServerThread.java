@@ -1,3 +1,4 @@
+import javax.swing.*;
 import java.io.*;
 import java.net.Socket;
 
@@ -34,6 +35,9 @@ public class ServerThread extends Thread {
     }
 
     private void mandarGlobal(String[] codigo){
-        System.out.println(codigo[2]+":"+codigo[5]);
+
+        JTextArea chatglobal= (JTextArea) Telas.chatGlobal.getComponent(1);
+        chatglobal.append(codigo[2]+":"+codigo[5]+"\n");
+
     }
 }

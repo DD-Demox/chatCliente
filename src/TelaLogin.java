@@ -4,6 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class TelaLogin extends JPanel {
+
     public TelaLogin(){
         setLayout(null);
         setBounds(0,0,300,200);
@@ -31,13 +32,13 @@ public class TelaLogin extends JPanel {
         logarB.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                TelaChatGlobal chatGlobal = new TelaChatGlobal();
-                Client client = new Client(serverJTF.getText(),Integer.parseInt(portaJTF.getText()),nickJTF.getText(),chatGlobal);
+                Telas.chatGlobal = new TelaChatGlobal();
+                Client client = new Client(serverJTF.getText(),Integer.parseInt(portaJTF.getText()),nickJTF.getText(),Telas.chatGlobal);
                 client.run();
                 Container pai = getParent();
                 pai.removeAll();
-                pai.add(chatGlobal);
-                pai.setBounds(0,0,chatGlobal.getWidth(),chatGlobal.getHeight());
+                pai.add(Telas.chatGlobal);
+                pai.setBounds(0,0,Telas.chatGlobal.getWidth(),Telas.chatGlobal.getHeight());
                 pai.revalidate();
                 pai.repaint();
 
