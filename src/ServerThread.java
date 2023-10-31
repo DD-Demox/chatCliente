@@ -1,14 +1,12 @@
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.net.Socket;
 
 public class ServerThread extends Thread {
     private Socket socket;
-    private BufferedReader br;
+    private ObjectInputStream in;
     public ServerThread(Socket socket) throws IOException {
         this.socket =socket;
-        br = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+        in = new ObjectInputStream(socket.getInputStream());
     }
 
     @Override
@@ -16,18 +14,26 @@ public class ServerThread extends Thread {
 
         try {
             while (true){
-                String response = br.readLine();
-                System.out.println(response);
+                String[] codigo = (String[]) in.readObject();
+                mandarGlobal(codigo);
+
+
             }
         } catch (IOException e) {
             throw new RuntimeException(e);
-        }finally {
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        } finally {
             try {
-                br.close();
+                in.close();
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
         }
 
+    }
+
+    private void mandarGlobal(String[] codigo){
+        System.out.println(codigo[2]+":"+codigo[5]);
     }
 }
