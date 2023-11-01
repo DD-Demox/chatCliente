@@ -1,66 +1,74 @@
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 
 public class TelaChatGlobal extends JPanel {
+    private JTextArea chatGlobal;
+    private JTextArea caixaDeMensagem;
+    private JButton botaoEnviar;
 
-    public TelaChatGlobal(){
+    public TelaChatGlobal() {
+
+
+
         setLayout(null);
-        setBounds(0,0,800,800);
+
+
 
         JLabel inicio = new JLabel("Chat Global");
-        inicio.setBounds(400,10 , 300, 40 );
+        inicio.setBounds(350, 10, 100, 40);
 
-        JTextArea chatGlobal = new JTextArea();
-        chatGlobal.setBounds(10,80,400, 400);
+        chatGlobal = new JTextArea();
+        chatGlobal.setBounds(10, 80, 580, 400);
         chatGlobal.setEditable(false);
+        JScrollPane chatScrollPane = new JScrollPane(chatGlobal);
+        chatScrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+        chatScrollPane.setBounds(10, 80, 760, 400);
 
-        JTextArea caixaDeMensagem = new JTextArea();
-        caixaDeMensagem.setBounds(10, 500 , 300, 50);
+        caixaDeMensagem = new JTextArea();
+        caixaDeMensagem.setBounds(10, 500, 600, 50);
         caixaDeMensagem.setLineWrap(true);
+        JScrollPane mensagemScrollPane = new JScrollPane(caixaDeMensagem);
+        mensagemScrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+        mensagemScrollPane.setBounds(10, 500, 600, 50);
+
+        botaoEnviar = new JButton("Enviar");
+        botaoEnviar.setBounds(620, 500, 150, 50);
 
 
-        JButton botaoEnviar = new JButton("Enviar");
-        botaoEnviar.setBounds(320,500, 90,50 );
 
-
-        botaoEnviar.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-
-            }
-        });
-
-        caixaDeMensagem.addKeyListener(new KeyListener() {
-            @Override
-            public void keyTyped(KeyEvent e) {
-
-            }
-
+        caixaDeMensagem.addKeyListener(new KeyAdapter() {
             @Override
             public void keyPressed(KeyEvent e) {
-                if(e.getKeyCode() == KeyEvent.VK_ENTER) {
+                if (e.getKeyCode() == KeyEvent.VK_ENTER && e.isShiftDown()) {
+                    caixaDeMensagem.append("\n");
+                } else if (e.getKeyCode() == KeyEvent.VK_ENTER && !e.isShiftDown()) {
                     botaoEnviar.doClick();
+                    e.consume();
                 }
-            }
-
-            @Override
-            public void keyReleased(KeyEvent e) {
-
             }
         });
 
-
-
         add(inicio);
-        add(chatGlobal);
-        add(caixaDeMensagem);
+        add(chatScrollPane);
+        add(mensagemScrollPane);
         add(botaoEnviar);
 
 
     }
+
+    public  String getText(){
+        return this.caixaDeMensagem.getText();
+    }
+
+    public void setText(String msg){
+        this.caixaDeMensagem.setText(msg);
+    }
+
+
 
 }
 

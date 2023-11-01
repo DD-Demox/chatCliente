@@ -29,10 +29,10 @@ public class Client extends Thread {
         this.name = nick;
         this.telaChatGlobal = telaChatGlobal;
         JButton botao = (JButton) this.telaChatGlobal.getComponent(3);
-        JTextArea caixaMensagem = (JTextArea) this.telaChatGlobal.getComponent(2);
         botao.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+
                 String[] codigo = new String[6];
                 codigo[0] = "global";
                 try {
@@ -41,10 +41,10 @@ public class Client extends Thread {
                     throw new RuntimeException(ex);
                 }
                 codigo[2] = name;
-                codigo[5] = caixaMensagem.getText();
+                codigo[5] = Telas.chatGlobal.getText();
                 try {
                     out.writeObject(codigo);
-                    caixaMensagem.setText("");
+                    Telas.chatGlobal.setText("");
                 } catch (IOException ex) {
                     throw new RuntimeException(ex);
                 }

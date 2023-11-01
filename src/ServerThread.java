@@ -36,7 +36,8 @@ public class ServerThread extends Thread {
 
     private void mandarGlobal(String[] codigo){
 
-        JTextArea chatglobal= (JTextArea) Telas.chatGlobal.getComponent(1);
+        JScrollPane caixaPane = (JScrollPane) Telas.chatGlobal.getComponent(1);
+        JTextArea chatglobal = (JTextArea) caixaPane.getViewport().getView();
         chatglobal.append(codigo[2]+":"+codigo[5]+"\n");
 
     }

@@ -7,7 +7,7 @@ public class Main {
         JFrame janela = new JFrame();
         TelaLogin login = new TelaLogin();
         janela.add(login);
-        janela.setBounds(0,0,login.getWidth(),login.getHeight());
+        janela.setBounds(0,0,800,800);
         janela.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
         janela.setResizable(true);
