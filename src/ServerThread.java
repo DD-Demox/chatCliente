@@ -4,7 +4,7 @@ import java.net.Socket;
 
 public class ServerThread extends Thread {
     private Socket socket;
-    private ObjectInputStream in;
+    public static ObjectInputStream in;
     public ServerThread(Socket socket) throws IOException {
         this.socket =socket;
         in = new ObjectInputStream(socket.getInputStream());

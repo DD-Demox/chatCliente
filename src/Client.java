@@ -11,11 +11,11 @@ import static javax.swing.text.StyleConstants.getComponent;
 
 public class Client extends Thread {
 
-    private ObjectOutputStream out;
-    Socket socket;
-    String msg;
-    String clientInput;
-    String name;
+    public static ObjectOutputStream out;
+    public static Socket socket;
+    private String msg;
+    private String clientInput;
+    private String name;
     ServerThread serverThread;
     String servidor;
     int porta;
