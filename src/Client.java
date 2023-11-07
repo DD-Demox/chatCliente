@@ -56,10 +56,12 @@ public class Client extends Thread {
     @Override
     public void run() {
         try {
-            this.socket = new Socket(this.servidor,this.porta);
+            socket = new Socket(this.servidor,this.porta);
             out = new ObjectOutputStream(socket.getOutputStream());
             serverThread = new ServerThread(socket);
             serverThread.start();
+            String[] nome ={"nome",this.name};
+            out.writeObject(nome);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

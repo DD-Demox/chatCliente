@@ -16,7 +16,15 @@ public class ServerThread extends Thread {
         try {
             while (true){
                 String[] codigo = (String[]) in.readObject();
-                mandarGlobal(codigo);
+                switch (codigo[0]){
+                    case "global":
+                        mandarGlobal(codigo);
+                        break;
+                    case "atualizarLista":
+                        Telas.chatGlobal.setLista(codigo);
+                        break;
+                }
+
 
 
             }
@@ -41,4 +49,5 @@ public class ServerThread extends Thread {
         chatglobal.append(codigo[2]+":"+codigo[5]+"\n");
 
     }
+
 }

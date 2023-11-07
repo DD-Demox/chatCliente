@@ -9,12 +9,16 @@ public class TelaChatGlobal extends JPanel {
     private JTextArea chatGlobal;
     private JTextArea caixaDeMensagem;
     private JButton botaoEnviar;
+    private DefaultListModel listaCliente;
+    private JList jlistaCliente;
+    private JScrollPane jspListaCliente;
 
     public TelaChatGlobal() {
 
 
 
         setLayout(null);
+
 
 
 
@@ -26,7 +30,7 @@ public class TelaChatGlobal extends JPanel {
         chatGlobal.setEditable(false);
         JScrollPane chatScrollPane = new JScrollPane(chatGlobal);
         chatScrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-        chatScrollPane.setBounds(10, 80, 760, 400);
+        chatScrollPane.setBounds(10, 80, 580, 400);
 
         caixaDeMensagem = new JTextArea();
         caixaDeMensagem.setBounds(10, 500, 600, 50);
@@ -37,6 +41,15 @@ public class TelaChatGlobal extends JPanel {
 
         botaoEnviar = new JButton("Enviar");
         botaoEnviar.setBounds(620, 500, 150, 50);
+
+        listaCliente = new DefaultListModel();
+        jlistaCliente = new JList(listaCliente);
+        jlistaCliente.setBounds(600,80,180,400);
+        jlistaCliente.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
+        jspListaCliente = new JScrollPane(jlistaCliente);
+        jspListaCliente.setBounds(600,80,180,400);
+        jspListaCliente.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+
 
 
 
@@ -56,6 +69,7 @@ public class TelaChatGlobal extends JPanel {
         add(chatScrollPane);
         add(mensagemScrollPane);
         add(botaoEnviar);
+        add(jspListaCliente);
 
 
     }
@@ -68,7 +82,12 @@ public class TelaChatGlobal extends JPanel {
         this.caixaDeMensagem.setText(msg);
     }
 
-
+    public void setLista(String[] lista){
+        listaCliente.removeAllElements();
+        for (int i = 1; i <lista.length ; i++) {
+            listaCliente.addElement(lista[i]);
+        }
+    }
 
 }
 
