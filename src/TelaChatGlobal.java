@@ -1,9 +1,9 @@
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
+import java.awt.event.*;
+import java.io.IOException;
+import java.net.InetAddress;
+import java.net.UnknownHostException;
 
 public class TelaChatGlobal extends JPanel {
     private JTextArea chatGlobal;
@@ -20,9 +20,7 @@ public class TelaChatGlobal extends JPanel {
         setLayout(null);
 
 
-
-
-        JLabel inicio = new JLabel("Chat Global");
+        JLabel inicio = new JLabel("Chat Global: "+Client.name);
         inicio.setBounds(350, 10, 100, 40);
 
         chatGlobal = new JTextArea();
@@ -64,7 +62,39 @@ public class TelaChatGlobal extends JPanel {
                 }
             }
         });
+        jlistaCliente.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                JList list = (JList) e.getSource();
+                if(e.getClickCount() == 2){
+                    String destinatario = (String) list.getSelectedValue();
+                    System.out.println(destinatario);
+                    TelaChatPrivado chatPrivado = new TelaChatPrivado(destinatario);
+                    Telas.chatsPrivados.add(chatPrivado);
+                }
+            }
+        });
+        botaoEnviar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
 
+                String[] codigo = new String[6];
+                codigo[0] = "global";
+                try {
+                    codigo[1] = InetAddress.getLocalHost().getHostAddress();
+                } catch (UnknownHostException ex) {
+                    throw new RuntimeException(ex);
+                }
+                codigo[2] = Client.name;
+                codigo[5] = Telas.chatGlobal.getText();
+                try {
+                    Client.out.writeObject(codigo);
+                    Telas.chatGlobal.setText("");
+                } catch (IOException ex) {
+                    throw new RuntimeException(ex);
+                }
+            }
+        });
         add(inicio);
         add(chatScrollPane);
         add(mensagemScrollPane);

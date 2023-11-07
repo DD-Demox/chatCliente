@@ -15,7 +15,7 @@ public class Client extends Thread {
     public static Socket socket;
     private String msg;
     private String clientInput;
-    private String name;
+    public static String name;
     ServerThread serverThread;
     String servidor;
     int porta;
@@ -28,28 +28,28 @@ public class Client extends Thread {
         this.porta = porta;
         this.name = nick;
         this.telaChatGlobal = telaChatGlobal;
-        JButton botao = (JButton) this.telaChatGlobal.getComponent(3);
-        botao.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-
-                String[] codigo = new String[6];
-                codigo[0] = "global";
-                try {
-                    codigo[1] = InetAddress.getLocalHost().getHostAddress();
-                } catch (UnknownHostException ex) {
-                    throw new RuntimeException(ex);
-                }
-                codigo[2] = name;
-                codigo[5] = Telas.chatGlobal.getText();
-                try {
-                    out.writeObject(codigo);
-                    Telas.chatGlobal.setText("");
-                } catch (IOException ex) {
-                    throw new RuntimeException(ex);
-                }
-            }
-        });
+//        JButton botao = (JButton) this.telaChatGlobal.getComponent(3);
+//        botao.addActionListener(new ActionListener() {
+//            @Override
+//            public void actionPerformed(ActionEvent e) {
+//
+//                String[] codigo = new String[6];
+//                codigo[0] = "global";
+//                try {
+//                    codigo[1] = InetAddress.getLocalHost().getHostAddress();
+//                } catch (UnknownHostException ex) {
+//                    throw new RuntimeException(ex);
+//                }
+//                codigo[2] = name;
+//                codigo[5] = Telas.chatGlobal.getText();
+//                try {
+//                    out.writeObject(codigo);
+//                    Telas.chatGlobal.setText("");
+//                } catch (IOException ex) {
+//                    throw new RuntimeException(ex);
+//                }
+//            }
+//        });
 
     }
 

@@ -23,6 +23,9 @@ public class ServerThread extends Thread {
                     case "atualizarLista":
                         Telas.chatGlobal.setLista(codigo);
                         break;
+                    case "msgPrivada":
+                        madarPrivado(codigo);
+                        break;
                 }
 
 
@@ -39,6 +42,18 @@ public class ServerThread extends Thread {
                 throw new RuntimeException(e);
             }
         }
+
+    }
+
+    private void madarPrivado(String[] codigo) {
+        TelaChatPrivado chatPrivado= null;
+        for(TelaChatPrivado tcp: Telas.chatsPrivados){
+            if(tcp.getDestinatario().equals(codigo[1])){
+                chatPrivado = tcp;
+                break;
+            }
+        }
+        chatPrivado.setTextChat(codigo[2]);
 
     }
 
