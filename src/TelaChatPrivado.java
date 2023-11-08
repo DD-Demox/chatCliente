@@ -1,9 +1,6 @@
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
+import java.awt.event.*;
 import java.io.IOException;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
@@ -67,6 +64,46 @@ public class TelaChatPrivado extends JFrame implements Runnable {
                 }
             }
         });
+        addWindowListener(new WindowListener() {
+            @Override
+            public void windowOpened(WindowEvent e) {
+
+            }
+
+            @Override
+            public void windowClosing(WindowEvent e) {
+                removeFromList();
+                for (TelaChatPrivado tcl: Telas.chatsPrivados
+                     ) {
+                    System.out.println(tcl.getDestinatario());
+                }
+            }
+
+            @Override
+            public void windowClosed(WindowEvent e) {
+
+            }
+
+            @Override
+            public void windowIconified(WindowEvent e) {
+
+            }
+
+            @Override
+            public void windowDeiconified(WindowEvent e) {
+
+            }
+
+            @Override
+            public void windowActivated(WindowEvent e) {
+
+            }
+
+            @Override
+            public void windowDeactivated(WindowEvent e) {
+
+            }
+        });
 
         painel.add(inicio);
         painel.add(chatScrollPane);
@@ -105,5 +142,9 @@ public class TelaChatPrivado extends JFrame implements Runnable {
     @Override
     public void run() {
 
+    }
+
+    public void removeFromList(){
+        Telas.chatsPrivados.remove(this);
     }
 }

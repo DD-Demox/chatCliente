@@ -71,6 +71,10 @@ public class TelaChatGlobal extends JPanel {
                     System.out.println(destinatario);
                     TelaChatPrivado chatPrivado = new TelaChatPrivado(destinatario);
                     Telas.chatsPrivados.add(chatPrivado);
+                    for (TelaChatPrivado tcl: Telas.chatsPrivados
+                         ) {
+                        System.out.println(tcl.getDestinatario());
+                    }
                 }
             }
         });
