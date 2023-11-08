@@ -68,12 +68,20 @@ public class TelaChatGlobal extends JPanel {
                 JList list = (JList) e.getSource();
                 if(e.getClickCount() == 2){
                     String destinatario = (String) list.getSelectedValue();
-                    System.out.println(destinatario);
-                    TelaChatPrivado chatPrivado = new TelaChatPrivado(destinatario);
-                    Telas.chatsPrivados.add(chatPrivado);
-                    for (TelaChatPrivado tcl: Telas.chatsPrivados
-                         ) {
-                        System.out.println(tcl.getDestinatario());
+                    if(!destinatario.equals(Client.name)){
+                        boolean achou = false;
+                        for (TelaChatPrivado tcp:
+                             Telas.chatsPrivados) {
+                            if(tcp.getDestinatario().equals(destinatario)){
+                                tcp.requestFocus();
+                                achou = true;
+                                break;
+                            }
+                        }
+                        if(achou==false){
+                            TelaChatPrivado chatPrivado = new TelaChatPrivado(destinatario);
+                            Telas.chatsPrivados.add(chatPrivado);
+                        }
                     }
                 }
             }
